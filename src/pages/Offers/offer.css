@@ -1,0 +1,122 @@
+.offer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 64px 0;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.offer__pictures {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.offer__picture__mainPicture {
+  width: 450px;
+  height: 600px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.offer__picture__additional {
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+.offer__infos {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 450px;
+  height: 600px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.offer__infos__price {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 16px 0 0 16px;
+}
+
+.offer__infos__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 90%;
+  gap: 16px;
+  margin: 16px;
+}
+
+.offer__infos__main__label {
+  color: gray;
+  margin-right: 16px;
+}
+
+.line {
+  border-bottom: 1px solid rgb(189, 188, 188);
+  height: 1px;
+  width: 90%;
+  margin-top: 32px;
+  margin-left: 16px;
+}
+
+.offer__infos__secondary__avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.offer__infos__secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 16px;
+  gap: 16px;
+  text-align: center;
+}
+
+.offer__infos__secondary__user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.offer__infos__secondary__name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.offer__btn {
+  width: 80%;
+}

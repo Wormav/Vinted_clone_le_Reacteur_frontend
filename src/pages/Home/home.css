@@ -1,0 +1,32 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+.home__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.home__pagination {
+  display: flex;
+  margin: 32px 0;
+  font-size: 20px;
+}
+
+.home__pagination__btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+}

@@ -1,0 +1,26 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  margin: 8px 0;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.navBar__auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.navBar__logo {
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+  }
+}

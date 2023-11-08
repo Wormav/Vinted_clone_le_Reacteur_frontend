@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  height: 400px;
+}
+
+.header__picture {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.header__tear {
+  position: absolute;
+  width: 80%;
+  bottom: 0px;
+}
