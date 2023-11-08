@@ -95,7 +95,7 @@ export default function Offers() {
               </div>
               <div>
                 <span className="offer__infos__main__label">ÉTAT:</span>
-                <span>{getProductDetail("ÉTAT")}</span>
+                <span>{getProductDetail("ETAT")}</span>
               </div>
               <div>
                 <span className="offer__infos__main__label">COULEUR:</span>
