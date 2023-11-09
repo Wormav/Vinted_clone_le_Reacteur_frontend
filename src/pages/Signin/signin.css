@@ -1,0 +1,55 @@
+.signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+.signin__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.signin__form__input {
+  text-align: flex-start;
+  border-width: 0 0 1px;
+  outline: none;
+  background-color: rgb(231, 231, 229);
+  padding: 8px 5px;
+  width: 200px;
+  border-radius: 5px;
+
+  &:focus-visible {
+    border-width: 0 0 2px;
+    border-color: green;
+  }
+}
+
+.signin__link {
+  text-decoration: none;
+  color: var(--primary-color);
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+}
+
+.news {
+  color: var(--primary-color);
+  margin: -16px 0;
+}
+
+.alert {
+  color: red;
+  margin-top: -16px;
+}
+
+.response {
+  color: red;
+  margin-top: -16px;
+}
