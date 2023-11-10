@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Header from "../../components/Header/Header";
-import axios from "axios";
 import Card from "../../components/Card/Card";
 import "./home.css";
+import { ArticlesContext } from "../../context/articlesContext";
 
 export default function Home() {
-  const [data, setData] = useState({ offers: [], count: 0 });
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { isLoading, data, setPage, page } = useContext(ArticlesContext);
 
-  const fetchData = async (page) => {
-    try {
-      const response = await axios.get(
-        `https://site--api-vinted--xqlhxl275zw4.code.run/offer?page=${page}`
-      );
-      setData(response.data);
-      setIsLoading(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+  useEffect(() => {}, [data, page]);
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    setPage(newPage);
   };
 
   return (
     <div className="home">
       <Header />
-      <h2>Articles populaires</h2>
+      <h2>Nos articles</h2>
       {!isLoading ? (
         <>
           <div className="home__content">
@@ -43,16 +27,16 @@ export default function Home() {
           <div className="home__pagination">
             <button
               className="home__pagination__btn"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
             >
               {"<"}
             </button>
-            <span>{currentPage}</span>
+            <span>{page}</span>
             <button
               className="home__pagination__btn"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage * 5 >= data.count}
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page * 5 >= data.count}
             >
               {">"}
             </button>

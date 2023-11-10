@@ -4,6 +4,7 @@ import logo from "../../assets/logo.svg";
 import SearchBar from "../SearchBar/SearchBar";
 import "./navBar.css";
 import { AuthContext } from "../../context/userContext";
+import SearchFilterPrice from "../SearchFilterPrice/SearchFilterPrice";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function NavBar() {
         alt="logo de vinted"
       />
       <SearchBar />
+      <SearchFilterPrice />
       <div className="navBar__auth">
         {isAuthenticated ? (
           <button onClick={handleClickLogout} className="btn-danger">

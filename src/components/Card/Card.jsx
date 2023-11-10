@@ -22,6 +22,7 @@ export default function Card({ offer }) {
       )}
       <div className="card__infos">
         <span>{offer.product_price} €</span>
+        <p>{offer.product_name}</p>
         <p>{productSize ? productSize.TAILLE : "No size available"}</p>
         <p>{productBrand ? productBrand.MARQUE : "No brand available"}</p>
       </div>

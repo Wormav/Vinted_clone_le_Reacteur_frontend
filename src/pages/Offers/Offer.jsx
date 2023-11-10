@@ -36,8 +36,6 @@ export default function Offers() {
     fetchData(id);
   }, [id]);
 
-  console.log(data);
-
   const getProductDetail = (key) => {
     if (data.product_details && data.product_details.length > 0) {
       const detail = data.product_details.find((detail) => detail[key]);
