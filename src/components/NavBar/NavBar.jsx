@@ -5,6 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import "./navBar.css";
 import { AuthContext } from "../../context/userContext";
 import SearchFilterPrice from "../SearchFilterPrice/SearchFilterPrice";
+import SearchFilterSlider from "../SearchFilterSlider/SearchFilterSlider";
 
 export default function NavBar() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function NavBar() {
         alt="logo de vinted"
       />
       <SearchBar />
+      <SearchFilterSlider />
       <SearchFilterPrice />
       <div className="navBar__auth">
         {isAuthenticated ? (

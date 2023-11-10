@@ -18,7 +18,7 @@ export default function Card({ offer }) {
       {productImageUrl ? (
         <img className="card__picture" src={productImageUrl} alt="" />
       ) : (
-        <div>No product image available</div> //mettre image par défaut
+        <div>No product image available</div>
       )}
       <div className="card__infos">
         <span>{offer.product_price} €</span>

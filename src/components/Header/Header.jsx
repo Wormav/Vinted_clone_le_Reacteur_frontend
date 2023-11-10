@@ -1,4 +1,4 @@
-import bannier from "../../../public/banner-wide.jpg";
+import bannier from "../../assets/banner-wide.jpg";
 import svg from "../../assets/tear.svg";
 import "./header.css";
 

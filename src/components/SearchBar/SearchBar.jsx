@@ -4,19 +4,12 @@ import "./searchBar.css";
 
 export default function SearchBar() {
   const [input, setInput] = useState("");
-  const { setUrl, setPage } = useContext(ArticlesContext);
+  const { setTitle } = useContext(ArticlesContext);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInput(value);
-    if (value.trim() === "") {
-      setPage(1);
-      setUrl(`https://site--api-vinted--xqlhxl275zw4.code.run/offer?page=1`);
-    } else {
-      setUrl(
-        `https://site--api-vinted--xqlhxl275zw4.code.run/offer?title=${value}`
-      );
-    }
+    setTitle(value);
   };
 
   return (

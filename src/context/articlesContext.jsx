@@ -8,6 +8,9 @@ export const ArticlesProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("price-asc");
+  const [title, setTitle] = useState("");
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(500);
 
   const baseUrl = "https://site--api-vinted--xqlhxl275zw4.code.run/offer";
 
@@ -26,8 +29,10 @@ export const ArticlesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setUrl(`${baseUrl}?page=${page}&limit=5&sort=${sort}`);
-  }, [page, sort]);
+    setUrl(
+      `${baseUrl}?page=${page}&limit=5&sort=${sort}&title=${title}&priceMin=${priceMin}&priceMax=${priceMax}`
+    );
+  }, [page, sort, title, priceMin, priceMax]);
 
   useEffect(() => {
     fetchData(url);
@@ -35,7 +40,18 @@ export const ArticlesProvider = ({ children }) => {
 
   return (
     <ArticlesContext.Provider
-      value={{ data, setData, isLoading, setUrl, setPage, page, setSort }}
+      value={{
+        data,
+        setData,
+        isLoading,
+        setUrl,
+        setPage,
+        page,
+        setSort,
+        setTitle,
+        setPriceMin,
+        setPriceMax,
+      }}
     >
       {children}
     </ArticlesContext.Provider>
