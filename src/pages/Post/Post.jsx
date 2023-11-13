@@ -1,31 +1,43 @@
 import "./post.css";
 import { useForm } from "react-hook-form";
 import axios from "../../config/axios.config";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Cookies from "js-cookie";
+import SubmissionModal from "../../components/SubmissionModal/SubmissionModal";
+import { ArticlesContext } from "../../context/articlesContext";
+import { useDropzone } from "react-dropzone";
 
 export default function Post() {
-  const [fileCount, setFileCount] = useState(0);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const { update, setUpdate } = useContext(ArticlesContext);
+
+  const { getRootProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setSelectedFiles([...selectedFiles, ...acceptedFiles]);
+    },
+  });
+
   const handleFileChange = (event) => {
-    const files = event.target.files;
-    setFileCount(files.length);
-    for (let i = 0; i < files.length; i++) {
-      console.log(`Fichier ${i}: ${files[i].name}`);
-    }
+    const files = Array.from(event.target.files);
+    setSelectedFiles(files);
   };
 
   const onSubmit = async (data) => {
+    setIsModalOpen(true);
+    setModalMessage("Envoi en cours... 🫸");
     const formData = new FormData();
-    if (data.picture && data.picture.length > 0) {
-      for (const file of data.picture) {
-        formData.append("picture", file);
-      }
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      formData.append("picture", selectedFiles[i]);
     }
 
     Object.keys(data)
@@ -37,24 +49,30 @@ export default function Post() {
     const token = Cookies.get("token");
 
     try {
-      const response = await axios.post("/offer/publish", formData, {
+      await axios.post("/offer/publish", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Succès :", response.data);
+      setModalMessage("Annonce postée ✅");
+      setUpdate(!update);
     } catch (error) {
-      console.error("Erreur :", error.response?.data || error.message);
+      console.error(error);
+      setModalMessage("Erreur lors de l'envoi 🚨");
     }
   };
 
   return (
-    <div className="post">
+    <div className="post" onClick={() => setIsModalOpen(false)}>
       <h1>Vends ton article</h1>
       <form className="post__form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="post__form__section picture-section">
+        <div
+          {...getRootProps()}
+          className="post__form__section picture-section"
+        >
           <input
+            {...getRootProps()}
             type="file"
             id="file-upload"
             {...register("picture")}
@@ -63,9 +81,9 @@ export default function Post() {
             multiple
           />
           <label htmlFor="file-upload" className="file-upload-label label">
-            {fileCount === 0
+            {selectedFiles.length === 0
               ? "+ Ajoute des photos"
-              : `${fileCount} fichier(s) sélectionné(s)`}
+              : `${selectedFiles.length} fichier(s) sélectionné(s)`}
           </label>
         </div>
         <div className="post__form__section">
@@ -135,6 +153,7 @@ export default function Post() {
           Ajouter
         </button>
       </form>
+      <SubmissionModal isOpen={isModalOpen} message={modalMessage} />
     </div>
   );
 }

@@ -11,6 +11,7 @@ export const ArticlesProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(500);
+  const [update, setUpdate] = useState(false);
 
   const baseUrl = "/offer";
 
@@ -36,7 +37,7 @@ export const ArticlesProvider = ({ children }) => {
 
   useEffect(() => {
     fetchData(url);
-  }, [url]);
+  }, [url, update]);
 
   return (
     <ArticlesContext.Provider
@@ -51,6 +52,8 @@ export const ArticlesProvider = ({ children }) => {
         setTitle,
         setPriceMin,
         setPriceMax,
+        update,
+        setUpdate,
       }}
     >
       {children}

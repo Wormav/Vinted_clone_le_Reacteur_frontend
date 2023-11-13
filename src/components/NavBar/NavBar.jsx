@@ -25,10 +25,15 @@ export default function NavBar() {
 
   const handleClickLogout = () => {
     handleLogout();
+    navigate("/");
   };
 
   const handleClickPost = () => {
-    navigate("/post");
+    if (isAuthenticated) {
+      navigate("/post");
+    } else {
+      navigate("/signin");
+    }
   };
 
   return (

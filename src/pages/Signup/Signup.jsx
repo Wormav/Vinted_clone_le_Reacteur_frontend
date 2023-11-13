@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../../config/axios.config";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../context/userContext";
-
-// css du fichier Signin.css
+import SubmissionModal from "../../components/SubmissionModal/SubmissionModal";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -12,24 +11,28 @@ export default function Signup() {
     username: "",
     password: "",
     newsletter: false,
+    avatar: null,
   });
   const [alert, setAlert] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const { handleSignin } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
-    const val = type === "checkbox" ? checked : e.target.value;
+    const value = type === "checkbox" ? checked : e.target.value;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: type === "checkbox" ? (checked ? true : false) : val,
-    }));
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, avatar: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
+    setOpenModal(true);
+    setModalMessage("Inscription en cours... 🫸");
     e.preventDefault();
     setAlert("");
 
@@ -38,11 +41,19 @@ export default function Signup() {
       return;
     }
 
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
+    });
+
     try {
-      const response = await axios.post("/user/signup", formData);
+      const response = await axios.post("/user/signup", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       const { token } = response.data;
-
       Cookies.set("token", token, { expires: 7 });
 
       handleSignin();
@@ -70,6 +81,13 @@ export default function Signup() {
       <form className="signin__form" onSubmit={handleSubmit}>
         <input
           className="signin__form__input"
+          type="file"
+          name="avatar"
+          onChange={handleImageChange}
+        />
+        <p className="text-avatar">Choisir une photo de profil</p>
+        <input
+          className="signin__form__input"
           type="text"
           placeholder="Nom d'utilisateur"
           name="username"
@@ -92,6 +110,7 @@ export default function Signup() {
           value={formData.password}
           onChange={handleChange}
         />
+
         <input
           className="signin__form__input"
           type="checkbox"
@@ -108,6 +127,7 @@ export default function Signup() {
           Pas encore de compte ? Inscris-toi !
         </Link>
       </form>
+      <SubmissionModal isOpen={openModal} message={modalMessage} />
     </div>
   );
 }
