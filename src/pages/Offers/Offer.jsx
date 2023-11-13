@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./offer.css";
-import axios from "axios";
+import axios from "../../config/axios.config";
 import { useEffect, useState } from "react";
 
 export default function Offers() {
@@ -13,9 +13,7 @@ export default function Offers() {
 
   const fetchData = async (id) => {
     try {
-      const response = await axios.get(
-        `https://site--api-vinted--xqlhxl275zw4.code.run/offer/${id}`
-      );
+      const response = await axios.get(`/offer/${id}`);
       setData(response.data.offer);
       setMainPicture(response.data.offer.product_image.url);
 
@@ -120,11 +118,9 @@ export default function Offers() {
                   </div>
                 </>
               ) : (
-                <>
-                  <div className="offer__infos__secondary__user">
-                    <span>N/A</span>
-                  </div>
-                </>
+                <div className="offer__infos__secondary__user">
+                  <span>N/A</span>
+                </div>
               )}
               <div className="offer__infos__secondary__name">
                 <span>{data.product_name}</span>

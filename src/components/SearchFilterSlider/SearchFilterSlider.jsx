@@ -4,9 +4,9 @@ import { useContext, useRef, useState } from "react";
 import { ArticlesContext } from "../../context/articlesContext";
 
 export default function SearchFilterSlider() {
-  const [values, setValues] = useState([0, 300]);
+  const [values, setValues] = useState([0, 500]);
 
-  const { setPriceMin, setPriceMax } = useContext(ArticlesContext);
+  const { setPriceMin, setPriceMax, setPage } = useContext(ArticlesContext);
   const timerRef = useRef(null);
 
   const onValuesChange = (newValues) => {
@@ -18,6 +18,7 @@ export default function SearchFilterSlider() {
     timerRef.current = setTimeout(() => {
       setPriceMin(newValues[0]);
       setPriceMax(newValues[1]);
+      setPage(1);
     }, 500);
   };
 
@@ -26,7 +27,7 @@ export default function SearchFilterSlider() {
       <Range
         step={1}
         min={0}
-        max={300}
+        max={500}
         values={values}
         onChange={onValuesChange}
         renderTrack={({ props, children }) => (
@@ -41,7 +42,7 @@ export default function SearchFilterSlider() {
                 values: values,
                 colors: ["#ccc", "#017782", "#ccc"],
                 min: 0,
-                max: 300,
+                max: 500,
               }),
             }}
           >

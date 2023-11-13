@@ -16,7 +16,7 @@ export const ArticlesProvider = ({ children }) => {
   const baseUrl = "/offer";
 
   const [url, setUrl] = useState(
-    `${baseUrl}?page=${page}&limit=5&sort=${sort}`
+    `${baseUrl}?page=${page}&limit=6&sort=${sort}`
   );
 
   const fetchData = async (url) => {
@@ -31,7 +31,7 @@ export const ArticlesProvider = ({ children }) => {
 
   useEffect(() => {
     setUrl(
-      `${baseUrl}?page=${page}&limit=5&sort=${sort}&title=${title}&priceMin=${priceMin}&priceMax=${priceMax}`
+      `${baseUrl}?page=${page}&limit=6&sort=${sort}&title=${title}&priceMin=${priceMin}&priceMax=${priceMax}`
     );
   }, [page, sort, title, priceMin, priceMax]);
 

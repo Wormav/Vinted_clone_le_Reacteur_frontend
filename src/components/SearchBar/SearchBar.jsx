@@ -4,12 +4,13 @@ import "./searchBar.css";
 
 export default function SearchBar() {
   const [input, setInput] = useState("");
-  const { setTitle } = useContext(ArticlesContext);
+  const { setTitle, setPage } = useContext(ArticlesContext);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInput(value);
     setTitle(value);
+    setPage(1);
   };
 
   return (

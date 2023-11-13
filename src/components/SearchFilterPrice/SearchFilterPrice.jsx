@@ -5,14 +5,16 @@ import { ArticlesContext } from "../../context/articlesContext";
 export default function SearchFilterPrice() {
   const [isChecked, setIsChecked] = useState(false);
 
-  const { setSort } = useContext(ArticlesContext);
+  const { setSort, setPage } = useContext(ArticlesContext);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     if (isChecked) {
       setSort("price-asc");
+      setPage(1);
     } else {
       setSort("price-desc");
+      setPage(1);
     }
   };
 

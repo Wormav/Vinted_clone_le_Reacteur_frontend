@@ -9,6 +9,10 @@ export default function Home() {
 
   useEffect(() => {}, [data, page]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [setPage]);
+
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
@@ -36,7 +40,7 @@ export default function Home() {
             <button
               className="home__pagination__btn"
               onClick={() => handlePageChange(page + 1)}
-              disabled={page * 5 >= data.count}
+              disabled={page * 6 >= data.count}
             >
               {">"}
             </button>
