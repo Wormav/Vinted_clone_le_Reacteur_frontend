@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../config/axios.config";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../context/userContext";
 
@@ -39,10 +39,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post(
-        "https://site--api-vinted--xqlhxl275zw4.code.run/user/signup",
-        formData
-      );
+      const response = await axios.post("/user/signup", formData);
 
       const { token } = response.data;
 

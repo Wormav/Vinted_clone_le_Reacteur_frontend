@@ -27,6 +27,10 @@ export default function NavBar() {
     handleLogout();
   };
 
+  const handleClickPost = () => {
+    navigate("/post");
+  };
+
   return (
     <div className="navBar">
       <img
@@ -54,7 +58,9 @@ export default function NavBar() {
           </>
         )}
       </div>
-      <button className="btn-secondary">Vends tes articles</button>
+      <button onClick={handleClickPost} className="btn-secondary">
+        Vends tes articles
+      </button>
     </div>
   );
 }

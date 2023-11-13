@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../config/axios.config";
 import { createContext, useEffect, useState } from "react";
 
 export const ArticlesContext = createContext();
@@ -12,7 +12,7 @@ export const ArticlesProvider = ({ children }) => {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(500);
 
-  const baseUrl = "https://site--api-vinted--xqlhxl275zw4.code.run/offer";
+  const baseUrl = "/offer";
 
   const [url, setUrl] = useState(
     `${baseUrl}?page=${page}&limit=5&sort=${sort}`
