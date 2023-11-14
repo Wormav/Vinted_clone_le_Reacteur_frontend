@@ -5,6 +5,7 @@ import Offer from "./pages/Offers/Offer";
 import Signin from "./pages/Signin/Signin";
 import Signup from "./pages/Signup/Signup";
 import Post from "./pages/Post/Post";
+import Payment from "./pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
       {
         path: "/post",
         element: <Post />,
+        children: [],
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment />,
         children: [],
       },
     ],

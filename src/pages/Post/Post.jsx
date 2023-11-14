@@ -1,11 +1,12 @@
 import "./post.css";
 import { useForm } from "react-hook-form";
 import axios from "../../config/axios.config";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import SubmissionModal from "../../components/SubmissionModal/SubmissionModal";
 import { ArticlesContext } from "../../context/articlesContext";
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
 
 export default function Post() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -16,6 +17,16 @@ export default function Post() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
+
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/signin");
+    }
+  }, [navigate, token]);
 
   const { update, setUpdate } = useContext(ArticlesContext);
 
@@ -45,8 +56,6 @@ export default function Post() {
       .forEach((key) => {
         formData.append(key, data[key]);
       });
-
-    const token = Cookies.get("token");
 
     try {
       await axios.post("/offer/publish", formData, {
@@ -100,6 +109,8 @@ export default function Post() {
           <label className="label">
             Décrit ton article
             <textarea
+              rows={5}
+              cols={50}
               className={errors.description ? "input error-input" : "input"}
               {...register("description", { required: true })}
             />
@@ -153,7 +164,7 @@ export default function Post() {
           Ajouter
         </button>
       </form>
-      <SubmissionModal isOpen={isModalOpen} message={modalMessage} />
+      <SubmissionModal isOpen={isModalOpen} message={modalMessage} btn={true} />
     </div>
   );
 }

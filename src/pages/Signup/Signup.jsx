@@ -127,7 +127,7 @@ export default function Signup() {
           Pas encore de compte ? Inscris-toi !
         </Link>
       </form>
-      <SubmissionModal isOpen={openModal} message={modalMessage} />
+      <SubmissionModal isOpen={openModal} message={modalMessage} btn={false} />
     </div>
   );
 }

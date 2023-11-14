@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./offer.css";
 import axios from "../../config/axios.config";
 import { useEffect, useState } from "react";
@@ -8,6 +8,8 @@ export default function Offers() {
   const [isLoading, setIsLoading] = useState(false);
   const [mainPicture, setMainPicture] = useState("");
   const [productPictures, setProductPictures] = useState([]);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -130,7 +132,12 @@ export default function Offers() {
               </div>
             </div>
             <div className="btn__container">
-              <button className="btn-secondary offer__btn">Acheter</button>
+              <button
+                onClick={() => navigate(`/payment/${data._id}`)}
+                className="btn-secondary offer__btn"
+              >
+                Acheter
+              </button>
             </div>
           </div>
         </>
